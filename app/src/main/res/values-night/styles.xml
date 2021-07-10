@@ -4,5 +4,7 @@
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:gravity">center</item>
+        <item name="fontFamily">sans-serif-light</item>
+
     </style>
 </resources>

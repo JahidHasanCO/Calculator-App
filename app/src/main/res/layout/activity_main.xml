@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="30sp"
+            android:maxLines="3"
             android:textColor="@color/text_main"
             android:fontFamily="sans-serif-light"
             tools:text="5+10-3" />
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"
             android:gravity="end"
             android:textSize="50sp"
+            android:maxLines="2"
             android:fontFamily="sans-serif"
             android:textColor="@color/green"
             tools:text="12" />
@@ -51,20 +53,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 style="@style/Button_Style"
+                android:textColor="@color/red"
                 android:text="C" />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_bracket_left"
+                android:id="@+id/button_bracket"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 style="@style/Button_Style"
+                android:textColor="@color/green"
                 android:text="(" />
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_bracket_right"
+                android:id="@+id/button_bracket_r"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
                 style="@style/Button_Style"
+                android:textColor="@color/green"
                 android:text=")" />
             <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/green"
                 android:id="@+id/button_division"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -94,6 +100,7 @@
                 style="@style/Button_Style"
                 android:text="9" />
             <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/green"
                 android:id="@+id/button_multiply"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -122,6 +129,7 @@
                 style="@style/Button_Style"
                 android:text="6" />
             <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/green"
                 android:id="@+id/button_subtraction"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -150,6 +158,7 @@
                 style="@style/Button_Style"
                 android:text="3" />
             <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/green"
                 android:id="@+id/button_addition"
                 android:layout_width="wrap_content"
                 android:layout_height="90dp"
@@ -158,6 +167,13 @@
 
         </TableRow>
         <TableRow>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_croxx"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                style="@style/Button_Style"
+                android:text="AC" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/button_0"
@@ -177,7 +193,7 @@
                 android:layout_height="90dp"
                 android:layout_weight="1"
                 style="@style/Button_Style"
-                android:background="@color/green"
+                android:textColor="@color/green"
                 android:text="=" />
 
         </TableRow>
