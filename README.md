@@ -16,4 +16,9 @@ You can use the backspace key to correct a simple mistake.
 
 ## App Screen
 
-<img src="https://github.com/JahidHasanCO/Calculator-App/blob/master/ART/Calculator.png" width="270" height="585"> <img src="https://github.com/JahidHasanCO/Calculator-App/blob/master/ART/Calculator-Dark.png" width="270" height="585">
+<img src="https://github.com/JahidHasanCO/Calculator-App/blob/master/ART/Calculator.png" width="270" height="585">             <img src="https://github.com/JahidHasanCO/Calculator-App/blob/master/ART/Calculator-Dark.png" width="270" height="585">
+
+
+### Contributing 💡
+If you want to contribute to this project and make it better with new ideas, your pull request is very welcomed.
+If you find any issue just put it in the repository issue section, thank you.
