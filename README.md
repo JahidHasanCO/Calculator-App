@@ -21,7 +21,7 @@ The calculator is the essential tool for your smartphone, simple and easy to use
 ```
 MIT License
 
-Copyright (c) 2018 Soojeong Shin
+Copyright (c) 2021 Jahid Hasan
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
