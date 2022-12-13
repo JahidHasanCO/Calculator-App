@@ -7,78 +7,57 @@ on:
     branches: [ "master" ]
 
 jobs:
-  
   test:
-    name: Run Unit Tests
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [21, 29, 33]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: checkout
+        uses: actions/checkout@v3
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
 
-      # Cache gradle
-      - name: Cache Gradle and wrapper
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+        
+      - name: AVD cache
         uses: actions/cache@v3
+        id: avd-cache
         with:
           path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: cache-${{ runner.os }}-${{ matrix.jdk }}-gradle-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
+            ~/.android/avd/*
+            ~/.android/adb*
+          key: avd-${{ matrix.api-level }}
+      - name: create AVD and generate snapshot for caching
+        if: steps.avd-cache.outputs.cache-hit != 'true'
+        uses: reactivecircus/android-emulator-runner@v2
 
-      - name: Run Unit tests
-        run: bash ./gradlew test --stacktrace
-  apk:
-      name: Generate APK
-      needs: test
-      runs-on: ubuntu-latest
-
-      steps:
-        - uses: actions/checkout@v3
-        - name: Setup Java JDK
-          uses: actions/setup-java@v3.8.0
-          with:
-            java-version: 11
-            distribution: 'temurin'
-
-        - name: Grant Permission to Execute
-          run: chmod +x gradlew
-
-        - name: Build debug APK
-          run: bash ./gradlew assembleDebug --stacktrace
-
-        - name: Upload APK to Github Artifacts
-          uses: actions/upload-artifact@v3.1.1
-          with:
-            name: app
-            path: app/build/outputs/apk/debug/app-debug.apk
-  
-  send-apk-on-telegram:
-    name: Send Apk on Telegram
-    needs: apk
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Stored Artifact
-        uses: actions/download-artifact@v3
         with:
-          name: app
+          api-level: ${{ matrix.api-level }}
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: false
+          script: echo "Generated AVD snapshot for caching."
 
-      - name: send telegram message on push
-        uses: appleboy/telegram-action@master
+      - name: Grant Permission to Execute
+
+        run: chmod +x gradlew
+
+      - name: run tests
+        uses: reactivecircus/android-emulator-runner@v2
+        
         with:
-          to: "-1001863916163"
-          token: "5915457647:AAGjdQ2IfM6SWg_iKYgIXuRVsEjA-WIJOBs"
-          message: |
-            Hi Guys,
-            ${{ github.actor }} created commit:
-            Commit message: ${{ github.event.commits[0].message }}
-            Repository: ${{ github.repository }}
-            See changes: https://github.com/${{ github.repository }}/commit/${{github.sha}}
-            
 
-            Created By @JahidHasanCo
+          api-level: ${{ matrix.api-level }}
 
-          document: app-debug.apk
-          photo: https://media.giphy.com/media/A6aHBCFqlE0Rq/giphy.gif
+          force-avd-creation: false
+
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+
+          disable-animations: true
+
+          script: ./gradlew connectedCheck
