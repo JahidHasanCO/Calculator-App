@@ -1,4 +1,4 @@
-package Dev.JahidHasanCo.calculator
+package com.bigkotik.calculator
 
 import org.junit.Test
 
