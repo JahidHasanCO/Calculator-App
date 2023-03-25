@@ -20,23 +20,16 @@ class MainActivity : AppCompatActivity() {
             input.text = ""
             output.text = ""
         }
-
         button_bracket.setOnClickListener {
-
             input.text = addToInputText("(")
-
         }
         button_bracket_r.setOnClickListener {
-
             input.text = addToInputText(")")
-
         }
-
         button_croxx.setOnClickListener {
             val removedLast = input.text.toString().dropLast(1)
             input.text = removedLast
         }
-
         button_0.setOnClickListener {
             input.text = addToInputText("0")
         }
@@ -76,7 +69,6 @@ class MainActivity : AppCompatActivity() {
         button_multiply.setOnClickListener {
             input.text = addToInputText("×") // ALT + 0215
         }
-
         button_subtraction.setOnClickListener {
             input.text = addToInputText("-")
         }
