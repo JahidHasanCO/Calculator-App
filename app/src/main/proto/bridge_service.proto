@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package proto;
+
+option java_multiple_files = true;
+
+option java_package = "com.bigkotik.transparentdatabridge";
+
+option go_package = "github.com/Big-Kotik/transparent-data-bridge-api/bridge/api/v1";
+
+service TransparentDataBridgeService {
+  rpc SendChunks(stream File) returns (FileStatus);
+}
+
+message SendFileRequest {
+  string file_name = 1;
+  int32 offset = 2;
+}
+
+message FileChunk {
+  bytes chunk = 1;
+}
+
+// First message in the stream must be of SendFileRequest type
+message File {
+  oneof fileInfo {
+    SendFileRequest request = 1;
+    FileChunk chunk = 2;
+  }
+}
+
+message FileStatus {
+  int32 last_chunk_offset = 1;
+}
